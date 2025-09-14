@@ -27,3 +27,8 @@ jobs:
 
       - name: Simulate Deploy
         run: echo "Deploy to staging environment completed successfully"
+
+      - name: Simulate Deploy Failure
+        run: |
+          echo "Simulating deploy failure..."
+          exit 1
