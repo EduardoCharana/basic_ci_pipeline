@@ -39,20 +39,5 @@ jobs:
           echo " Simulating deploy failure..."
           exit 1
 
-      # Simulation 3: Warning (does not fail the pipeline)
       - name: Simulate Warning
-        run: echo " Warning: Non-critical issue detected, continuing pipeline..."
-
-      # Simulation 4: Slow deploy
-      - name: Simulate Slow Deploy
-        run: |
-          echo " Simulating slow deploy..."
-          sleep 10
-          echo "Slow deploy finished"
-
-      # Simulation 5: Rollback after error
-      - name: Simulate Rollback
-        run: |
-          echo " Error detected in deployment, starting rollback..."
-          sleep 3
-          echo "Rollback completed successfully"
+        run: echo "⚠️ Warning: Non-critical issue detected, continuing pipeline..."
