@@ -2,42 +2,48 @@ name: CI Pipeline - Simulations
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout repository
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      # Step 2: Setup Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: "18"
 
-      # Step 3: Install dependencies
       - name: Install Dependencies
         run: npm install
 
-      # Step 4: Run tests
       - name: Run Tests
         run: npm test
 
-      # Simulation 1: Successful deploy
       - name: Simulate Successful Deploy
-        run: echo " Deploy to staging environment completed successfully"
+        run: echo "Deploy to staging environment completed successfully"
 
-      # Simulation 2: Deploy failure
       - name: Simulate Deploy Failure
         run: |
-          echo " Simulating deploy failure..."
+          echo "Simulating deploy failure..."
           exit 1
 
       - name: Simulate Warning
-        run: echo "⚠️ Warning: Non-critical issue detected, continuing pipeline..."
+        run: echo "Warning: Non-critical issue detected, continuing pipeline..."
+
+      - name: Simulate Slow Deploy
+        run: |
+          echo "Simulating slow deploy..."
+          sleep 10
+          echo "Slow deploy finished"
+
+      - name: Simulate Rollback
+        run: |
+          echo "Error detected in deployment, starting rollback..."
+          sleep 3
+          echo "Rollback completed successfully"
